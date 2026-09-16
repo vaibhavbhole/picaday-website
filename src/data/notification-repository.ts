@@ -17,10 +17,19 @@ export class NotificationRepository {
       "id, type, title, body, agenda_id, bucket_id, winning_post_id, profile_visit_count, proposal_title, proposal_description, proposal_submitted_at, is_read, created_at, winning_post:posts!notifications_winning_post_id_fkey(content_url, content_urls)";
     const selectPlain =
       "id, type, title, body, agenda_id, bucket_id, winning_post_id, profile_visit_count, proposal_title, proposal_description, proposal_submitted_at, is_read, created_at, winning_post:posts!notifications_winning_post_id_fkey(content_url)";
-    let result = await this.client.from("notifications").select(selectWithUrls).order("created_at", { ascending: false }).limit(50);
-    if (result.error && /content_urls/i.test(result.error.message)) {
-      result = await this.client.from("notifications").select(selectPlain).order("created_at", { ascending: false }).limit(50);
-    }
+    const first = await this.client
+      .from("notifications")
+      .select(selectWithUrls)
+      .order("created_at", { ascending: false })
+      .limit(50);
+    const result =
+      first.error && /content_urls/i.test(first.error.message)
+        ? await this.client
+            .from("notifications")
+            .select(selectPlain)
+            .order("created_at", { ascending: false })
+            .limit(50)
+        : first;
     if (result.error) throw result.error;
     const items = (result.data ?? [])
       .map((raw) => this.mapRow(asRecord(raw)))
