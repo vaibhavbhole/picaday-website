@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root,
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0d0d12;
+  --surface: #1a1a22;
+  --surface-elevated: #22222c;
+  --card: #1e1e26;
+  --card-border: #2a2a35;
+  --lavender: #b4b1f4;
+  --lavender-dark: #5e5ce6;
+  --lavender-muted: #8b88d8;
+  --orange: #ff8a00;
+  --teal: #76ead7;
+  --green: #4cd964;
+  --bucket-green: #1b3d2f;
+  --bucket-green-text: #6fcf97;
+  --text-primary: #ffffff;
+  --text-secondary: #9e9eab;
+  --text-muted: #6b6b78;
+  --nav-inactive: #6b6b78;
+  --overlay-track: rgb(0 0 0 / 0.3);
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --background: #f4f3fa;
+  --surface: #ffffff;
+  --surface-elevated: #f0eef8;
+  --card: #ffffff;
+  --card-border: #e2e0ee;
+  --lavender: #534fcf;
+  --lavender-dark: #4a46c4;
+  --lavender-muted: #6f6bc0;
+  --orange: #e67800;
+  --teal: #0f8f80;
+  --green: #2f9e4f;
+  --bucket-green: #d8f3e6;
+  --bucket-green-text: #1b7a4c;
+  --text-primary: #16161d;
+  --text-secondary: #5c5c6b;
+  --text-muted: #8a8a99;
+  --nav-inactive: #8a8a99;
+  --overlay-track: rgb(22 22 29 / 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-plus-jakarta);
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+a {
+  color: inherit;
+}
